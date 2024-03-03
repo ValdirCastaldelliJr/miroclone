@@ -1,0 +1,5 @@
+-- star front end
+    npm run dev
+
+-- start convex
+    npx convex dev
