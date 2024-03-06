@@ -19,7 +19,6 @@ const DashboardLayout = ({
                         <Navbar />
                         {children}
                     </div>
-                    
                 </div>
             </div>
         </main>
