@@ -1,5 +1,9 @@
 "use client";
 
+import { EmptyBoards } from "./empty-boards";
+import { EmptyFavorites } from "./empty-favorites";
+import { EmptySearch } from "./empty-search";
+
 interface BoardListProps {
     orgId: string;
     query: {
@@ -17,27 +21,15 @@ export const BoardList = ({
     const data = []; // TODO: Change to API call
 
     if (!data?.length && query.search) {
-        return (
-            <div className="flex flex-col items-center justify-center">
-                No Boards Found
-            </div>
-        );
+        return <EmptySearch />;
     }
 
     if (!data?.length && query.favorites) {
-        return (
-            <div className="flex flex-col items-center justify-center">
-                No Favorites Boards Found
-            </div>
-        );
+        return <EmptyFavorites />;
     }
 
     if (!data?.length) {
-        return (
-            <div className="flex flex-col items-center justify-center">
-                No Boards at all
-            </div>
-        );
+        return <EmptyBoards />;
     }
 
     return (
