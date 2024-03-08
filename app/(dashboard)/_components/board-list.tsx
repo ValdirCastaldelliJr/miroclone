@@ -32,6 +32,7 @@ export const BoardList = ({
         return <EmptyBoards />;
     }
 
+    
     return (
         <div>
             {JSON.stringify(query)}
