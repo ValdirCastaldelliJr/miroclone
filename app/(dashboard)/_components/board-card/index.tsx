@@ -5,9 +5,12 @@ import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 import { useAuth } from "@clerk/nextjs";
 import { MoreHorizontal } from "lucide-react";
+import { toast } from "sonner";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { Actions } from "@/components/actions";
+import { useApiMutation } from "@/hooks/use-api-mutation";
+import { api } from "@/convex/_generated/api";
 
 import { Overlay } from "./overlay";
 import { Footer } from "./footer";
@@ -42,6 +45,27 @@ export const BoardCard = ({
         addSuffix: true 
     });
 
+    const {
+        mutate: onFavorite,
+        pending: favoritePending,
+    } = useApiMutation(api.board.favorite);
+
+    const {
+        mutate: onUnfavorite,
+        pending: unfavoritePending,
+    } = useApiMutation(api.board.unfavorite);
+
+
+    const toggleFavorite = () => {
+        if (isFavorite) {
+            onUnfavorite({ id })
+                .catch( () => toast.error("Failed to unfavorite board"));
+        } else { 
+            onFavorite({ id, orgId })
+                .catch( () => toast.error("Failed to favorite board"));
+        }
+    };
+
     return (
         <Link href={`/board/${id}`}> 
             <div className="group aspect-[100/127] border rounded-lg flex flex-col justify-between overflow-hidden"> 
@@ -70,8 +94,8 @@ export const BoardCard = ({
                     title={title} 
                     authorLabel={authorLabel} 
                     createdAtLabel={createdAtLabel}
-                    onClick={() => {}}
-                    disabled={false}
+                    onClick={toggleFavorite}
+                    disabled={favoritePending || unfavoritePending}
                 />
             </div>
         </Link>
