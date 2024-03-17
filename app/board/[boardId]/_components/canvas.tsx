@@ -4,7 +4,14 @@ import { Info } from "./info";
 import { Toolbar } from "./toolbar";
 import { Participants } from "./participants";
 
-export const Canvas = () => {
+interface CanvasProps {
+    boardId: string;
+};
+
+
+export const Canvas = ({
+    boardId
+}:CanvasProps) => {
     return (
         <main
             className="h-full w-full bg-neutral-100 touch-none"    
