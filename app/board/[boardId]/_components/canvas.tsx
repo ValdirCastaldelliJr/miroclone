@@ -14,7 +14,7 @@ export const Canvas = ({
 }:CanvasProps) => {
     return (
         <main
-            className="h-full w-full bg-neutral-100 touch-none"    
+            className="h-full w-full relative bg-neutral-100 touch-none"    
         >
             <Info />
             <Participants />
