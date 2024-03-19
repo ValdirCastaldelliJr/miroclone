@@ -20,4 +20,5 @@ const BoardIdPage = ({
     );
 };
 
+
 export default BoardIdPage;
